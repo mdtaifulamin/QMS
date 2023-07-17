@@ -346,11 +346,11 @@ defectsText:{
       marginBottom: 4
   },
   input:{
-      backgroundColor:'white',
+      backgroundColor:GlobalStyles.colors.inputBackgroundColor,
       padding:11,
       borderRadius:10,
       fontSize:18,
-      color:GlobalStyles.colors.primary800,
+      color:GlobalStyles.colors.textcolor,
       elevation:2,
       borderWidth:.4,
       borderColor:'white',

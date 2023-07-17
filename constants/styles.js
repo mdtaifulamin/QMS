@@ -23,6 +23,7 @@ export const GlobalStyles={
             titleBackground:'white',
             titleText:"#008921",
             textcolor:"#008921",
-            defectsBackground:'white'
+            defectsBackground:'white',
+            inputBackgroundColor:'white',
     }
 }
