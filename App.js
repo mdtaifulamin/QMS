@@ -234,7 +234,7 @@ async function  rejectsHandler(){
           setModalisVisible(!modalisVisible)
         }}>
         <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:GlobalStyles.colors.manageProductionInformationBackground}}> 
-          <View style={{backgroundColor:'white',paddingHorizontal:screen_width*.28,paddingVertical:screen_width*.05,margin:10,elevation:10}}>
+          <View style={styles.modal1TitleContainer}>
             <Text style={{fontSize:screen_width*.05}}> DEFECT TYPES </Text>
           </View>         
           <FlatList
@@ -340,6 +340,13 @@ buttonText:{
        borderWidth:1,
        borderColor:GlobalStyles.colors.error50
   },
+  modal1TitleContainer:{
+    backgroundColor:GlobalStyles.colors.titleBackground,
+    paddingHorizontal:screen_width*.28,
+    paddingVertical:screen_width*.05,
+    margin:10,
+    elevation:10,
+  },
   modal2ButtonContainer:{
     flexDirection:'row',
     marginTop:screen_height*0.05,
@@ -357,6 +364,7 @@ buttonText:{
     alignItems:'center'},
   modal2TitleText:{
     fontSize:screen_width*.05,
+    color:GlobalStyles.colors.titleText
   },
 })
 

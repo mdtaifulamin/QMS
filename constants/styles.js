@@ -20,6 +20,7 @@ export const GlobalStyles={
             buttonTextColor:"#ffffff",
             inputBox:"White",
             deleteButton:"#760000",
-            titleBackground:'white'
+            titleBackground:'white',
+            titleText:"#008921"
     }
 }
