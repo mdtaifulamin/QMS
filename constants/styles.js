@@ -21,6 +21,8 @@ export const GlobalStyles={
             inputBox:"White",
             deleteButton:"#760000",
             titleBackground:'white',
-            titleText:"#008921"
+            titleText:"#008921",
+            textcolor:"#008921",
+            defectsBackground:'white'
     }
 }

@@ -105,8 +105,8 @@ export default function App() {
     
     return (
       <TouchableOpacity onPress={handleDefectPress}>
-        <View style={styles.buttonInnerContainer}>
-          <Text style={styles.buttonText}> {item.title} </Text>
+        <View style={styles.defectsInnerContainer}>
+          <Text style={styles.defectsText}> {item.title} </Text>
         </View>
       </TouchableOpacity>
     );
@@ -164,8 +164,8 @@ async function  rejectsHandler(){
  <>   
  
   <View style={styles.container}>
-      <View style={{backgroundColor:'white',opacity:rmodalisVisible?0.3:1,justifyContent:'center',alignItems:'center',padding:screen_height*.01,margin:10,borderRadius:20,elevation:10,}}>
-        <Text style={{fontSize:30,fontWeight:'bold'}}> QMS </Text>
+      <View style={[styles.inputTitleBackgroundContainer , {opacity:rmodalisVisible?0.3:1}]}>
+        <Text style={styles.inputTitleText}> QMS </Text>
       </View>
   <ScrollView style={{flex:10,opacity:rmodalisVisible?0.3:1}}>
     <View style={{flex:7}}>
@@ -215,11 +215,9 @@ async function  rejectsHandler(){
       </View>
     </View> 
     
-    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',flex:3,borderTopLeftRadius:40,borderTopRightRadius:40,backgroundColor:'white',elevation:10,paddingBottom:'60%', paddingTop:"10%",marginTop:screen_height*0.05}}>
-      
+    <View style={styles.primaryButtonContainer}>      
       <PrimaryButton onPress={defectsHandler}>Defects</PrimaryButton>
-      <PrimaryButton onPress={rejectsHandler}>Rejects</PrimaryButton>
-      
+      <PrimaryButton onPress={rejectsHandler}>Rejects</PrimaryButton>      
     </View>
     </ScrollView>
     
@@ -233,9 +231,9 @@ async function  rejectsHandler(){
         onRequestClose={()=>{
           setModalisVisible(!modalisVisible)
         }}>
-        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:GlobalStyles.colors.manageProductionInformationBackground}}> 
+        <View style={styles.modal1Container}> 
           <View style={styles.modal1TitleContainer}>
-            <Text style={{fontSize:screen_width*.05}}> DEFECT TYPES </Text>
+            <Text style={styles.modal1TitleText}> DEFECT TYPES </Text>
           </View>         
           <FlatList
             style={{}} 
@@ -258,7 +256,7 @@ async function  rejectsHandler(){
           setModalisVisible(!rmodalisVisible)
         }}>
         <View style={{flex:1,justifyContent:'center',alignItems:'center',}}> 
-          <View style={{backgroundColor:'white',paddingHorizontal:screen_width*.04,paddingVertical:screen_height*.02,elevation:10,marginHorizontal:screen_width*0.02,borderRadius:20,elevation:30}}>
+          <View style={styles.modal2Container}>
             <View style={styles.modal2TitleContainer}>
               <Text style={styles.modal2TitleText}> Rejection Quantity </Text>
             </View>
@@ -290,7 +288,22 @@ const styles = StyleSheet.create({
     flex:10,
     backgroundColor:GlobalStyles.colors.manageProductionInformationBackground
   },
-  buttonInnerContainer:{
+  inputTitleBackgroundContainer:{
+    backgroundColor:GlobalStyles.colors.titleBackground,
+    justifyContent:'center',
+    alignItems:'center',
+    padding:screen_height*.02,
+    //margin:10,
+    borderBottomLeftRadius:30,
+    borderBottomRightRadius:30,
+    elevation:10,
+  },
+  inputTitleText:{
+    fontSize:30,
+    fontWeight:'bold',
+    color:GlobalStyles.colors.titleText,
+  },
+  defectsInnerContainer:{
     elevation:5,
     shadowColor:'#000',
     padding: 16 ,
@@ -302,12 +315,25 @@ const styles = StyleSheet.create({
     maxHeight:screen_height*.09,
     justifyContent:'center',
     alignItems:'center',
-    backgroundColor:'white'
+    backgroundColor:GlobalStyles.colors.defectsBackground,
 },
-buttonText:{
+primaryButtonContainer:{
+  flexDirection:'row',
+  justifyContent:'center',
+  alignItems:'center',
+  flex:3,
+  borderTopLeftRadius:40,
+  borderTopRightRadius:40,
+  backgroundColor:'white',
+  elevation:10,
+  paddingBottom:'60%',
+  paddingTop:"10%",
+  marginTop:screen_height*0.05
+},
+defectsText:{
     fontWeight:'bold',
     textAlign:'center',
-    color:'black',
+    color:GlobalStyles.colors.textcolor,
     fontSize:11, 
 },
   inputContainer:{
@@ -316,7 +342,7 @@ buttonText:{
   },
   label:{
       fontSize:12,
-      color:GlobalStyles.colors.text_border_button,
+      color:GlobalStyles.colors.textcolor,
       marginBottom: 4
   },
   input:{
@@ -340,12 +366,30 @@ buttonText:{
        borderWidth:1,
        borderColor:GlobalStyles.colors.error50
   },
+  modal1Container:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:GlobalStyles.colors.manageProductionInformationBackground
+  },
   modal1TitleContainer:{
     backgroundColor:GlobalStyles.colors.titleBackground,
     paddingHorizontal:screen_width*.28,
     paddingVertical:screen_width*.05,
     margin:10,
     elevation:10,
+  },
+  modal1TitleText:{
+    fontSize:screen_width*.05,
+    color:GlobalStyles.colors.titleText
+  },
+  modal2Container:{
+    backgroundColor:'white',
+    paddingHorizontal:screen_width*.04,
+    paddingVertical:screen_height*.02,
+    elevation:10,
+    marginHorizontal:screen_width*0.02,
+    borderRadius:20,elevation:30
   },
   modal2ButtonContainer:{
     flexDirection:'row',
