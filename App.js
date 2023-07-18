@@ -35,7 +35,7 @@ export default function App() {
   
   const [modalisVisible,setModalisVisible]=useState(false)
   const [rmodalisVisible,setrModalisVisible]=useState(false)
- const data = [
+  const data = [
     { id: 211, title: "Shade in Garment" },
     { id: 221, title: "Dirty Spot" },
     { id: 222, title: "Oil Spot" },
@@ -99,8 +99,7 @@ export default function App() {
       //   [item.id]: 1,
       // }));
       const data= {...convertedInputs,[item.id]: 1,}
-      await StoreData(data)
-      
+      await StoreData(data)      
     };
     
     return (
@@ -113,7 +112,7 @@ export default function App() {
   };
   
   
-const [inputs,setInputs]= useState({
+  const [inputs,setInputs]= useState({
     date: new Date(),
     lineNumber:0,
     buyerName:'',    
@@ -121,164 +120,161 @@ const [inputs,setInputs]= useState({
     SO:0,
     defectQuantity:0,                       
     rejectQuatity:0,
-    production:0,
-    
-}); 
+    production:0,      
+  }); 
 
-function inputChangeHandler(inputIdentifier,enteredValue) {
+  function inputChangeHandler(inputIdentifier,enteredValue) {
     setInputs((curInputs)=>{
       return{
          ...curInputs,
          [inputIdentifier]: enteredValue}
         })
-      };
-const convertedInputs ={
-  date: inputs.date,
-  lineNumber:+inputs.lineNumber,
-  buyerName:inputs.buyerName,    
-  styleName:inputs.styleName,
-  SO:+inputs.SO,
-  defectQuantity:+inputs.defectQuantity,                       
-  rejectQuatity:+inputs.rejectQuatity,
-  production:+inputs.production,
-}
-function defectsHandler(){
-//  const d=inputs.defectQuantity+1;
-//  inputChangeHandler("defectQuantity",d)
- setModalisVisible(true)
-}
+  };
+  const convertedInputs ={
+    date: inputs.date,
+    lineNumber:+inputs.lineNumber,
+    buyerName:inputs.buyerName,    
+    styleName:inputs.styleName,
+    SO:+inputs.SO,
+    defectQuantity:+inputs.defectQuantity,                       
+    rejectQuatity:+inputs.rejectQuatity,
+    production:+inputs.production,
+  }
+  function defectsHandler(){
+  //  const d=inputs.defectQuantity+1;
+  //  inputChangeHandler("defectQuantity",d)
+  setModalisVisible(true)
+  }
 
-async function  rejectsHandler(){
-  setrModalisVisible(true)
-  //inputChangeHandler("rejectQuatity",r)
- }
- async function  rejectsSubmitHandler(){
-  setrModalisVisible(false)
-  //inputChangeHandler("rejectQuatity",r)
-  await StoreData(convertedInputs)
-  inputChangeHandler("rejectQuatity",0)
- }
+  async function  rejectsHandler(){
+    setrModalisVisible(true)
+    //inputChangeHandler("rejectQuatity",r)
+  }
+  async function  rejectsSubmitHandler(){
+    setrModalisVisible(false)
+    //inputChangeHandler("rejectQuatity",r)
+    await StoreData(convertedInputs)
+    inputChangeHandler("rejectQuatity",0)
+  }
 
- const today= new Date();
+  const today= new Date();
   return (
- <>   
- 
-  <View style={styles.container}>
-      <View style={[styles.inputTitleBackgroundContainer , {opacity:rmodalisVisible?0.3:1}]}>
-        <Text style={styles.inputTitleText}> QMS </Text>
-      </View>
-  <ScrollView style={{flex:10,opacity:rmodalisVisible?0.3:1}}>
-    <View style={{flex:7}}>
-      
-      <View style={{backgroundColor:'white',justifyContent:'center',alignItems:'flex-end',padding:'1%',marginTop:2,flex:1,marginLeft:screen_width*0.7,borderTopLeftRadius:8,borderBottomLeftRadius:8}}>
-        <Text style={{fontSize:10,fontWeight:'bold'}}> Date: {today.toLocaleDateString()} </Text>
-      </View>
-      <View style={{flex:6,margin:10}}>
-        <Input label={'Line'} 
-          textInputConfig={{
-            keyboardType:'phone-pad',
-            maxLentgh: 10,
-            onChangeText: inputChangeHandler.bind(this,'lineNumber'),
-            value: inputs.lineNumber.toString(),
-          }}/>
-        <Input label={'Buyer Name'} 
-          textInputConfig={{
-            //keyboardType:'phone-pad',
-            maxLentgh: 10,
-            onChangeText: inputChangeHandler.bind(this,'buyerName'),
-            value: inputs.buyerName.toString(),
-          }}/>
-        <Input label={'Style Name'} 
-          textInputConfig={{
-            //keyboardType:'phone-pad',
-            maxLentgh: 10,
-            onChangeText: inputChangeHandler.bind(this,'styleName'),
-            value: inputs.styleName.toString(),
-          }}/>
-          <Input label={'SO'} 
-          textInputConfig={{
-            keyboardType:'phone-pad',
-            maxLentgh: 10,
-            onChangeText: inputChangeHandler.bind(this,'SO'),
-            value: inputs.SO.toString(),
-          }}/>
-        {/* <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',padding:'4%',marginHorizontal:'4%',marginTop:10}}>
-          <View style={{width:'40%',justifyContent:'center',alignItems:'center',backgroundColor:'white',padding:'4%',borderRadius:10,marginHorizontal:'4%'}}>
-            <Text>DEFECTS </Text>
-            <Text> {inputs.defectQuantity}</Text>
+    <>       
+      <View style={styles.container}>
+          <View style={[styles.inputTitleBackgroundContainer , {opacity:rmodalisVisible?0.3:1}]}>
+            <Text style={styles.inputTitleText}> QMS </Text>
           </View>
-          <View style={{width:'40%',justifyContent:'center',alignItems:'center',backgroundColor:'white',padding:'4%',borderRadius:10,marginHorizontal:'4%'}}>
-            <Text>Rejects : </Text>
-            <Text>{inputs.rejectQuatity}</Text>
-          </View>
-        </View> */}
-      </View>
-    </View> 
-    
-    <View style={styles.primaryButtonContainer}>      
-      <PrimaryButton onPress={defectsHandler}>Defects</PrimaryButton>
-      <PrimaryButton onPress={rejectsHandler}>Rejects</PrimaryButton>      
-    </View>
-    </ScrollView>
-    
-  </View>     
-    <View style={{justifyContent:'center',alignItems:'center',}}>
-      <Modal
-        animationType="slide"
-        //transparent={true}
-        presentationStyle="modal"
-        visible={modalisVisible}
-        onRequestClose={()=>{
-          setModalisVisible(!modalisVisible)
-        }}>
-        <View style={styles.modal1Container}> 
-          <View style={styles.modal1TitleContainer}>
-            <Text style={styles.modal1TitleText}> DEFECT TYPES </Text>
-          </View>         
-          <FlatList
-            style={{}} 
-            data={data}
-            renderItem={DefectsItem}
-            keyExtractor={(item) => item.id}
-            numColumns={2}
-           
-            />
-        </View>
-      </Modal>
-    </View>
-    <View style={{justifyContent:'center',alignItems:'center',}}>
-      <Modal
-        animationType='slide'
-        transparent={true}
-        //presentationStyle="modal"
-        visible={rmodalisVisible}
-        onRequestClose={()=>{
-          setModalisVisible(!rmodalisVisible)
-        }}>
-        <View style={{flex:1,justifyContent:'center',alignItems:'center',}}> 
-          <View style={styles.modal2Container}>
-            <View style={styles.modal2TitleContainer}>
-              <Text style={styles.modal2TitleText}> Rejection Quantity </Text>
+        <ScrollView style={{flex:10,opacity:rmodalisVisible?0.3:1}}>
+          <View style={{flex:7}}>            
+            <View style={{backgroundColor:'white',justifyContent:'center',alignItems:'flex-end',padding:'1%',marginTop:2,flex:1,marginLeft:screen_width*0.7,borderTopLeftRadius:8,borderBottomLeftRadius:8}}>
+              <Text style={{fontSize:10,fontWeight:'bold'}}> Date: {today.toLocaleDateString()} </Text>
             </View>
-              <View style={{maxWidth:screen_width,justifyContent:'center',alignItems:'center',}}>
-                <Input label={'Insert Reject Quantity'} 
-                  textInputConfig={{
-                    keyboardType:'decimal-pad',
-                    maxLentgh: 10,
-                    onChangeText: inputChangeHandler.bind(this,'rejectQuatity'),
-                    value: inputs.rejectQuatity.toString(),
-                  }}/>
-              </View>
-              <View style={styles.modal2ButtonContainer}>
-                <SeconderyButton onPress={rejectsSubmitHandler}>Submit</SeconderyButton>
-                <SeconderyButton onPress={()=>{setrModalisVisible(false)}}>Cancel</SeconderyButton>
-              </View>
-          </View>         
+            <View style={{flex:6,margin:10}}>
+              <Input label={'Line'} 
+                textInputConfig={{
+                  keyboardType:'phone-pad',
+                  maxLentgh: 10,
+                  onChangeText: inputChangeHandler.bind(this,'lineNumber'),
+                  value: inputs.lineNumber.toString(),
+                }}/>
+              <Input label={'Buyer Name'} 
+                textInputConfig={{
+                  //keyboardType:'phone-pad',
+                  maxLentgh: 10,
+                  onChangeText: inputChangeHandler.bind(this,'buyerName'),
+                  value: inputs.buyerName.toString(),
+                }}/>
+              <Input label={'Style Name'} 
+                textInputConfig={{
+                  //keyboardType:'phone-pad',
+                  maxLentgh: 10,
+                  onChangeText: inputChangeHandler.bind(this,'styleName'),
+                  value: inputs.styleName.toString(),
+                }}/>
+                <Input label={'SO'} 
+                textInputConfig={{
+                  keyboardType:'phone-pad',
+                  maxLentgh: 10,
+                  onChangeText: inputChangeHandler.bind(this,'SO'),
+                  value: inputs.SO.toString(),
+                }}/>
+              {/* <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',padding:'4%',marginHorizontal:'4%',marginTop:10}}>
+                <View style={{width:'40%',justifyContent:'center',alignItems:'center',backgroundColor:'white',padding:'4%',borderRadius:10,marginHorizontal:'4%'}}>
+                  <Text>DEFECTS </Text>
+                  <Text> {inputs.defectQuantity}</Text>
+                </View>
+                <View style={{width:'40%',justifyContent:'center',alignItems:'center',backgroundColor:'white',padding:'4%',borderRadius:10,marginHorizontal:'4%'}}>
+                  <Text>Rejects : </Text>
+                  <Text>{inputs.rejectQuatity}</Text>
+                </View>
+              </View> */}
+            </View>
+          </View> 
+          
+          <View style={styles.primaryButtonContainer}>      
+            <PrimaryButton onPress={defectsHandler}>Defects</PrimaryButton>
+            <PrimaryButton onPress={rejectsHandler}>Rejects</PrimaryButton>      
+          </View>
+        </ScrollView>
+        
+      </View>     
+        <View style={{justifyContent:'center',alignItems:'center',}}>
+          <Modal
+            animationType="slide"
+            //transparent={true}
+            presentationStyle="modal"
+            visible={modalisVisible}
+            onRequestClose={()=>{
+              setModalisVisible(!modalisVisible)
+            }}>
+            <View style={styles.modal1Container}> 
+              <View style={styles.modal1TitleContainer}>
+                <Text style={styles.modal1TitleText}> DEFECT TYPES </Text>
+              </View>         
+              <FlatList
+                style={{}} 
+                data={data}
+                renderItem={DefectsItem}
+                keyExtractor={(item) => item.id}
+                numColumns={2}
+              
+                />
+            </View>
+          </Modal>
         </View>
-      </Modal>
-    </View>
-    <StatusBar style="auto" />
-  </>
+        <View style={{justifyContent:'center',alignItems:'center',}}>
+          <Modal
+            animationType='slide'
+            transparent={true}
+            //presentationStyle="modal"
+            visible={rmodalisVisible}
+            onRequestClose={()=>{
+              setModalisVisible(!rmodalisVisible)
+            }}>
+            <View style={{flex:1,justifyContent:'center',alignItems:'center',}}> 
+              <View style={styles.modal2Container}>
+                <View style={styles.modal2TitleContainer}>
+                  <Text style={styles.modal2TitleText}> Rejection Quantity </Text>
+                </View>
+                  <View style={{maxWidth:screen_width,justifyContent:'center',alignItems:'center',}}>
+                    <Input label={'Insert Reject Quantity'} 
+                      textInputConfig={{
+                        keyboardType:'decimal-pad',
+                        maxLentgh: 10,
+                        onChangeText: inputChangeHandler.bind(this,'rejectQuatity'),
+                        value: inputs.rejectQuatity.toString(),
+                      }}/>
+                  </View>
+                  <View style={styles.modal2ButtonContainer}>
+                    <SeconderyButton onPress={rejectsSubmitHandler}>Submit</SeconderyButton>
+                    <SeconderyButton onPress={()=>{setrModalisVisible(false)}}>Cancel</SeconderyButton>
+                  </View>
+              </View>         
+            </View>
+          </Modal>
+        </View>
+        <StatusBar style="auto" />
+    </>
    
   );
 }
@@ -316,26 +312,26 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:GlobalStyles.colors.defectsBackground,
-},
-primaryButtonContainer:{
-  flexDirection:'row',
-  justifyContent:'center',
-  alignItems:'center',
-  flex:3,
-  borderTopLeftRadius:40,
-  borderTopRightRadius:40,
-  backgroundColor:'white',
-  elevation:10,
-  paddingBottom:'60%',
-  paddingTop:"10%",
-  marginTop:screen_height*0.05
-},
-defectsText:{
-    fontWeight:'bold',
-    textAlign:'center',
-    color:GlobalStyles.colors.textcolor,
-    fontSize:11, 
-},
+  },
+  primaryButtonContainer:{
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+    flex:3,
+    borderTopLeftRadius:40,
+    borderTopRightRadius:40,
+    backgroundColor:'white',
+    elevation:10,
+    paddingBottom:'60%',
+    paddingTop:"10%",
+    marginTop:screen_height*0.05
+  },
+  defectsText:{
+      fontWeight:'bold',
+      textAlign:'center',
+      color:GlobalStyles.colors.textcolor,
+      fontSize:11, 
+  },
   inputContainer:{
       marginHorizontal:4,
       marginVertical:8,
